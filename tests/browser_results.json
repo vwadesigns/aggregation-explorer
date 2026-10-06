@@ -1,0 +1,129 @@
+{
+  "version": "dda-explorer-0.1.0",
+  "browser": "144.0.7559.96",
+  "context": "set_content / about:blank; CPU worker",
+  "webgpuRuntimeTested": false,
+  "nativeSaveDialogTested": false,
+  "tests": [
+    {
+      "name": "App opens and renders the default starting mask",
+      "result": "PASS",
+      "detail": {
+        "backend": "cpu",
+        "shape": [
+          192,
+          192
+        ],
+        "patches": 67,
+        "coverage": 0.3054470486111111
+      }
+    },
+    {
+      "name": "Forward evolution and rectangular rendering",
+      "result": "PASS",
+      "detail": {
+        "time": 200,
+        "stats": {
+          "mass": 4.000059820480471,
+          "coverage": 0.3214154411764706,
+          "patches": 27,
+          "largest": 690,
+          "maxU": 12.113551139831543,
+          "minU": 2.128382838503863e-32,
+          "minV": 0.3146315813064575,
+          "maxV": 1.2133533954620361,
+          "drift": 1.496651075155805e-05
+        },
+        "crc": 1081895706
+      }
+    },
+    {
+      "name": "Backward / forward timeline replay recovers bit-identical CPU state",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "Selected stage can be pinned",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "Threshold and inversion do not change the continuous fields",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "Extending the horizon preserves state and seed",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "Saved recipe reload reproduces selected stage and pins",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "New seek supersedes a long in-flight seek",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "Stop calculation settles at a valid completed step",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "8-bit and 16-bit grayscale exports encode through the UI",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "Model notes dialog opens and closes",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "Play and pause use the same evolution timeline",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "Return to start restores the initial state",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "Reference perturbation initialization evolves and disables irrelevant shape controls",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "Default 192-wide run through model age 200",
+      "result": "PASS",
+      "detail": {
+        "stats": {
+          "mass": 4.000031370649221,
+          "coverage": 0.3279079861111111,
+          "patches": 46,
+          "largest": 1844,
+          "maxU": 11.793781280517578,
+          "minU": 2.704829939935877e-27,
+          "minV": 0.3159556984901428,
+          "maxV": 1.1637722253799438,
+          "drift": 7.861340087293806e-06
+        },
+        "time": 200
+      }
+    },
+    {
+      "name": "Mobile viewport has no horizontal overflow",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "name": "No uncaught main-page JavaScript errors",
+      "result": "PASS",
+      "detail": []
+    }
+  ]
+}

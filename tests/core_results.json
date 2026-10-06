@@ -1,0 +1,154 @@
+{
+  "version": "dda-explorer-0.1.0",
+  "node": "v22.16.0",
+  "tests": [
+    {
+      "name": "Identical seed gives identical starting fields",
+      "result": "PASS"
+    },
+    {
+      "name": "Changing the seed changes starting placement",
+      "result": "PASS"
+    },
+    {
+      "name": "Material budget is consistent across seeds",
+      "result": "PASS",
+      "detail": {
+        "worstAbsoluteMeanError": 2.9507191356969997e-8
+      }
+    },
+    {
+      "name": "Selected parameters participate in initialization",
+      "result": "PASS"
+    },
+    {
+      "name": "Rectangular closed and periodic domains stay finite and balanced",
+      "result": "PASS",
+      "detail": [
+        {
+          "boundary": "closed",
+          "nx": 96,
+          "ny": 64,
+          "steps": 6000,
+          "dt": 0.02,
+          "drift": 9.443058331578303e-7
+        },
+        {
+          "boundary": "periodic",
+          "nx": 96,
+          "ny": 64,
+          "steps": 6000,
+          "dt": 0.02,
+          "drift": 0.000001852376805119433
+        }
+      ]
+    },
+    {
+      "name": "Checkpoint restore and forward replay are bit-identical",
+      "result": "PASS",
+      "detail": {
+        "step": 1400,
+        "crc": 1331285923
+      }
+    },
+    {
+      "name": "Changing numerical batch size does not change the CPU result",
+      "result": "PASS"
+    },
+    {
+      "name": "Cache remains bounded and always retains initial state",
+      "result": "PASS",
+      "detail": {
+        "retainedSteps": [
+          0,
+          17,
+          18,
+          19
+        ]
+      }
+    },
+    {
+      "name": "Invalid parameter combinations are rejected explicitly",
+      "result": "PASS"
+    },
+    {
+      "name": "Finite extremes of initialization and short evolution",
+      "result": "PASS",
+      "detail": [
+        {
+          "parameters": {
+            "coverage": 0.12,
+            "total": 7,
+            "radius": 1.2,
+            "variation": 1,
+            "irregularity": 0.8
+          },
+          "dt": 0.01,
+          "minU": 5.362524230036348e-17,
+          "minV": 0.09957441687583923,
+          "mass": 6.999999912491099
+        },
+        {
+          "parameters": {
+            "coverage": 0.65,
+            "total": 2,
+            "radius": 9,
+            "variation": 0,
+            "irregularity": 0
+          },
+          "dt": 0.02,
+          "minU": 1.1440999089160982e-32,
+          "minV": 0.3678654730319977,
+          "mass": 2.000000332733211
+        },
+        {
+          "parameters": {
+            "a": 6,
+            "b": 0.5,
+            "da": 0.2,
+            "db": 2
+          },
+          "dt": 0.01,
+          "minU": 2.3694780966073896e-18,
+          "minV": 0.46066418290138245,
+          "mass": 4.000000043485856
+        },
+        {
+          "parameters": {
+            "init": "perturbations"
+          },
+          "dt": 0.02,
+          "minU": 1.1384731531143188,
+          "minV": 0.8561245799064636,
+          "mass": 4.000000161772022
+        },
+        {
+          "parameters": {
+            "aspect": 0.75,
+            "boundary": "periodic"
+          },
+          "dt": 0.02,
+          "minU": 6.795511342969573e-16,
+          "minV": 0.29581841826438904,
+          "mass": 4.000000011316442
+        }
+      ]
+    },
+    {
+      "name": "Longer default CPU run shows genuine patch loss",
+      "result": "PASS",
+      "detail": {
+        "grid": [
+          128,
+          128
+        ],
+        "time": 300,
+        "initialPatches": 58,
+        "finalPatches": 46,
+        "initialCoverage": 0.33331298828125,
+        "finalCoverage": 0.3236083984375,
+        "relativeMassDrift": 0.00003126680877289235
+      }
+    }
+  ]
+}

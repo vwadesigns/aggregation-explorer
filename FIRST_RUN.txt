@@ -1,0 +1,15 @@
+AGGREGATION EXPLORER 0.1
+
+Extract the ZIP. Double-click Launch_Aggregation_Explorer.bat.
+Keep its console window open while using the app. No pip packages are needed.
+
+The single Aggregation_Explorer.html also contains the whole app and can be
+opened directly when browser policy permits. WebGPU is attempted first;
+CPU worker mode is the automatic fallback.
+
+Start with seed 4281. Compare model ages 0, 25, 100, and 200.
+Move Evolution backward to return to earlier stages. New seed starts over.
+Export selected mask is near the bottom of the left settings panel.
+
+README.md contains the controls, source attribution, and known limitations.
+docs/TEST_REPORT.md distinguishes tested CPU behavior from untested GPU behavior.

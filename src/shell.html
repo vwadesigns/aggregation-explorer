@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A local, seeded density-dependent aggregation experiment. Explore one pattern through time and export black-and-white masks.">
+<title>Aggregation Explorer · 0.1</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d3f3b'/%3E%3Ccircle cx='12' cy='14' r='6' fill='white'/%3E%3Ccircle cx='20' cy='20' r='7' fill='white'/%3E%3C/svg%3E">
+<style>/*__STYLE__*/</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><div><h1>Aggregation Explorer</h1><p>SEEDED PATTERNS / EVOLVING SYSTEMS</p></div><span class="version">0.1</span></div>
+  <div class="header-actions"><span id="engineBadge" class="badge"><span class="dot"></span>Starting engine</span><button id="helpButton" class="quiet">About the model</button></div>
+</header>
+<main class="workspace">
+<aside class="controls" aria-label="Pattern settings">
+  <section class="control-section">
+    <div class="section-head"><span class="eyebrow">01 / STARTING POINT</span><button id="defaultsButton" class="text-button" title="Restore this app's starting preset.">Defaults</button></div>
+    <label for="seed">Seed</label><div class="row seed-row"><input id="seed" type="number" value="4281" min="0" max="4294967295" step="1"><button id="newSeed" title="Make a different starting arrangement. This resets the timeline.">New seed</button></div>
+    <p class="hint">One seed. One evolving family of shapes.</p>
+    <label for="preset">Starting character</label>
+    <select id="preset"><option value="balanced">Irregular patches</option><option value="small">Small scattered patches</option><option value="broad">Broad connected patches</option><option value="reference">Uniform perturbations · reference</option></select>
+    <div class="slider-control"><div class="label-row"><label for="radius">Initial patch scale</label><output id="radiusValue"></output></div><input id="radius" type="range" min="1.2" max="9" step="0.1"><p class="hint">Larger footprints, fewer starting patches. Model units.</p></div>
+    <div class="slider-control"><div class="label-row"><label for="coverage">Initial coverage target</label><output id="coverageValue"></output></div><input id="coverage" type="range" min="0.12" max="0.65" step="0.01"><p class="hint">Sets the amount of starting geometry; actual area is reported.</p></div>
+    <div class="slider-control"><div class="label-row"><label for="variation">Size variation</label><output id="variationValue"></output></div><input id="variation" type="range" min="0" max="1" step="0.05"><p class="hint">Similar sizes at the left; a broader mixture at the right.</p></div>
+    <div class="slider-control"><div class="label-row"><label for="irregularity">Starting irregularity</label><output id="irregularityValue"></output></div><input id="irregularity" type="range" min="0" max="0.8" step="0.05"><p class="hint">Lobes and uneven outlines in the starting patches only.</p></div>
+    <p class="reset-note">Starting-point changes create a new history.</p>
+  </section>
+  <section class="control-section">
+    <span class="eyebrow">02 / MASK APPEARANCE</span>
+    <div class="slider-control"><div class="label-row"><label for="threshold">Patch threshold</label><output id="thresholdValue">3.00</output></div><input id="threshold" type="range" min="0.25" max="10" step="0.05" value="3"><p class="hint">Higher values contract the black boundary. Does not change the simulation.</p></div>
+    <label class="check"><input id="invert" type="checkbox"><span>Invert black and white</span></label>
+  </section>
+  <details class="control-section advanced"><summary>Advanced model &amp; quality</summary>
+    <p class="hint">DDA coefficients follow Siteur et al. (2023). These controls change the experiment, not just its contrast.</p>
+    <div class="form-grid">
+      <div><label for="resolution">Simulation width</label><select id="resolution"><option value="128">128 · quick</option><option value="192" selected>192 · balanced</option><option value="256">256 · finer</option><option value="384">384 · slower</option><option value="512">512 · demanding</option></select></div>
+      <div><label for="aspect">Aspect ratio</label><select id="aspect"><option value="1">1 : 1</option><option value="1.5">3 : 2</option><option value="2">2 : 1</option><option value="0.75">3 : 4</option></select></div>
+      <div><label for="length">Domain width</label><input id="length" type="number" min="48" max="192" step="1"></div>
+      <div><label for="total">Material budget T</label><input id="total" type="number" min="2" max="7" step="0.1"></div>
+      <div><label for="a">Feedback a</label><input id="a" type="number" min="2" max="6" step="0.1"></div>
+      <div><label for="b">Feedback b</label><input id="b" type="number" min="0.5" max="2" step="0.1"></div>
+      <div><label for="da">Retained diffusion</label><input id="da" type="number" min="0.025" max="0.2" step="0.0025"></div>
+      <div><label for="db">Mobile diffusion</label><input id="db" type="number" min="0.5" max="2" step="0.1"></div>
+    </div>
+    <label for="boundary">Boundary</label><select id="boundary"><option value="closed">Closed · no material crosses the edge</option><option value="periodic">Periodic · opposite edges exchange</option></select>
+    <label for="accuracy">Numerical step</label><select id="accuracy"><option value="standard">Automatic conservative step</option><option value="fine">Fine · half the automatic step</option></select>
+    <label for="backend">Compute engine</label><select id="backend"><option value="auto">Automatic · try WebGPU, else CPU</option><option value="cpu">CPU worker</option><option value="gpu">WebGPU only</option></select>
+    <p class="hint">Changing the simulation grid rebuilds the experiment. A coarse grid may alter contours and slow or pin late-stage changes. PNG export does not rebuild the grid.</p>
+    <dl class="diagnostics"><div><dt>Time step</dt><dd id="dtReadout">—</dd></div><div><dt>Mean u + v</dt><dd id="massReadout">—</dd></div><div><dt>Relative drift</dt><dd id="driftReadout">—</dd></div><div><dt>State cache</dt><dd id="cacheReadout">—</dd></div></dl>
+    <p id="engineDetail" class="hint"></p>
+  </details>
+  <section class="control-section export-section">
+    <span class="eyebrow">03 / KEEP THIS STAGE</span>
+    <div class="form-grid"><div><label for="exportSize">PNG width</label><select id="exportSize"><option value="0">Simulation width</option><option value="512">512 px</option><option value="1024" selected>1024 px</option><option value="2048">2048 px</option><option value="4096">4096 px</option></select></div><div><label for="bitDepth">Precision</label><select id="bitDepth"><option value="8">8-bit gray</option><option value="16">16-bit gray</option></select></div></div>
+    <button id="exportButton" class="primary wide" disabled>Export selected mask</button>
+    <p class="hint">Single-channel, pure black/white PNG. Larger exports resample the current field before thresholding; they do not add simulated detail.</p>
+    <div class="row"><button id="saveSetup" class="wide" disabled>Save setup</button><button id="loadSetup" class="wide">Load setup</button></div><input type="file" id="setupFile" accept=".json,application/json" hidden>
+  </section>
+</aside>
+<section class="studio" aria-label="Simulation viewer">
+  <div class="viewer-card">
+    <div class="viewer-toolbar"><div><span class="eyebrow">PATTERN FIELD</span><span id="gridBadge" class="subtle">—</span></div><div class="row"><button id="fitButton" class="text-button" title="Fit the image to the viewport.">Fit</button><button id="fullscreenButton" class="text-button">Expand view</button></div></div>
+    <div id="canvasArea" class="canvas-area"><canvas id="preview" width="768" height="768" aria-label="Black and white aggregation mask"></canvas><div id="emptyMessage" class="empty-message">Preparing your starting pattern…</div></div>
+    <div class="metrics"><div><span class="metric-name">MODEL AGE</span><strong id="ageMetric">0.00</strong></div><div><span class="metric-name">PATCHES</span><strong id="patchMetric">—</strong></div><div><span class="metric-name">OCCUPIED AREA</span><strong id="areaMetric">—</strong></div><div class="metric-caption">Patch count uses four-neighbor connectivity<br>at the simulation grid, before inversion.</div></div>
+  </div>
+  <section class="timeline-card" aria-label="Evolution timeline">
+    <div class="timeline-header"><div><span class="eyebrow">EVOLUTION</span><span id="timelineCaption" class="subtle">The same starting point, farther along.</span></div><div class="row"><label class="inline-label" for="timeInput">Go to age</label><input id="timeInput" type="number" min="0" max="65536" step="0.1" value="0"></div></div>
+    <div class="scrubber"><div id="cacheTicks" class="cache-ticks" aria-hidden="true"></div><input id="evolution" type="range" min="0" max="1000" step="1" value="0" aria-label="Evolution stage" disabled></div>
+    <div id="timelineLabels" class="timeline-labels"></div>
+    <div class="timeline-actions"><div class="row"><button id="playButton" class="primary" disabled>Play</button><button id="resetButton" disabled>Return to start</button><button id="cancelButton" disabled>Stop calculation</button></div><div class="row"><button id="pinButton" disabled>Pin stage</button><button id="extendButton">Extend ×2</button><button id="endButton" disabled>Build to end</button></div></div>
+    <div id="bookmarks" class="bookmarks"></div>
+  </section>
+  <div class="status-bar"><span id="status" role="status" aria-live="polite">Initializing…</span><span id="cacheStatus">Local processing · no uploads</span></div>
+  <div id="notice" class="notice" role="alert" hidden></div>
+</section>
+</main>
+<dialog id="aboutDialog"><div class="dialog-head"><h2>A process, not a crossfade.</h2><button id="closeAbout" aria-label="Close model notes">Close</button></div>
+<p>Each seed defines the starting continuous fields. The <strong>density-dependent aggregation (DDA)</strong> equations exchange material between a slower retained field <em>u</em> and a faster mobile field <em>v</em>.</p>
+<pre>R = u·v − a·u / (b + u)
+u_next = u + dt · ( R + Da · Laplacian(u))
+v_next = v + dt · (−R + Db · Laplacian(v))</pre>
+<p>The calculation uses separate old/new states. Nothing is repeatedly blurred and thresholded into the next simulation step. Thresholding is display/export only.</p>
+<p><strong>What is adapted:</strong> seeded irregular starting patches, fixed starting material budget, synchronous numerical updates, cell-face boundaries, checkpoint replay, and the browser interface. The reference starting mode uses small paired perturbations rather than the notebook’s two independent noise fields.</p>
+<p><strong>What is not claimed:</strong> this is not the exact Texel dune-grass animation, a wind/sand-height simulation, a WM plug-in, or a scientifically calibrated terrain model. Coarsening can be slow; larger model age does not guarantee fewer components at every stage. Finite grids can affect late-time behavior.</p>
+<p>Moving backward restores continuous-field checkpoints and replays forward. Evicted cache entries are rebuilt from an earlier state. A setup saves the recipe and selected age, not the whole history. Results are repeatable within a fixed version, grid, and backend; CPU/GPU pixel identity is not guaranteed.</p>
+<p><strong>Source:</strong> Siteur et al. (2023), <em>Phase-separation physics underlies new theory for the resilience of patchy ecosystems</em>, PNAS 120(2), e2202683120. <a href="https://doi.org/10.1073/pnas.2202683120" target="_blank" rel="noopener noreferrer">Paper</a> · <a href="https://github.com/liuqx315/PS-Resilience-in-Ecosystems" target="_blank" rel="noopener noreferrer">Research repository</a>.</p>
+<p class="hint">This independently written explorer does not bundle the authors’ code or claim their endorsement. Ordinary use makes no network requests beyond loading the local app. External reference links open only when clicked.</p>
+</dialog>
+<script id="core-code">/*__CORE__*/</script>
+<script id="gpu-code" type="text/plain">/*__GPU__*/</script>
+<script id="worker-code" type="text/plain">/*__WORKER__*/</script>
+<script>/*__PNG__*/</script>
+<script>/*__APP__*/</script>
+</body></html>

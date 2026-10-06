@@ -1,0 +1,19 @@
+{
+  "checked_on": "2026-10-06",
+  "repository_created": false,
+  "pages_enabled": false,
+  "live_site_verified": false,
+  "index_matches_original_html": true,
+  "application_source_unchanged": true,
+  "original_build_and_launchers_unchanged": true,
+  "external_script_style_image_dependencies": [],
+  "html_sha256": "6f115103270c3f8db267e418bf54e91058d203d28ffd9197cbd47ab8a4bc8c6f",
+  "scope": "Packaging checks only. Archived tests remain in docs/TEST_REPORT.md. No Windows or live GitHub Pages execution is claimed.",
+  "local_http_subpath_check": {
+    "path": "/aggregation-explorer/",
+    "status": 200,
+    "content_type": "text/html",
+    "served_bytes_match_index": true,
+    "sha256": "6f115103270c3f8db267e418bf54e91058d203d28ffd9197cbd47ab8a4bc8c6f"
+  }
+}

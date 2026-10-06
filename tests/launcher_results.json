@@ -1,0 +1,12 @@
+{
+  "python": "3.13.5",
+  "platform": "Linux test environment",
+  "tests": {
+    "serves_exact_html": "PASS",
+    "head_headers": "PASS",
+    "unrelated_files_not_served": "PASS",
+    "loopback_only": "PASS"
+  },
+  "windows_batch_executed": false,
+  "native_browser_launch_tested": false
+}

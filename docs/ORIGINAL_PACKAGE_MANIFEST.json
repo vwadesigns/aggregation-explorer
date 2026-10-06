@@ -1,0 +1,135 @@
+{
+  "version": "dda-explorer-0.1.0",
+  "files": [
+    {
+      "path": "Aggregation_Explorer.html",
+      "bytes": 62279,
+      "sha256": "6f115103270c3f8db267e418bf54e91058d203d28ffd9197cbd47ab8a4bc8c6f"
+    },
+    {
+      "path": "FIRST_RUN.txt",
+      "bytes": 724,
+      "sha256": "bc3b365b3be7564dcfc31447790ce36c883c47aee0e11c1258971fcfdec36a5a"
+    },
+    {
+      "path": "Launch_Aggregation_Explorer.bat",
+      "bytes": 735,
+      "sha256": "99c5b794b04f2e622149a42af19fd69736eff8210c501b3d1882f9d3498173d5"
+    },
+    {
+      "path": "README.md",
+      "bytes": 10247,
+      "sha256": "ea9ed722cf5785a64796ceee358adc48988bf6774306970ad92abd04ec2e9568"
+    },
+    {
+      "path": "build.py",
+      "bytes": 547,
+      "sha256": "938a98c7de13b9e1d840b86fe674da8b328f42a4734efe39e5ef38de54c2d76f"
+    },
+    {
+      "path": "docs/MODEL.md",
+      "bytes": 9287,
+      "sha256": "d87ca96762f4a56c61a29906d2b4b3e911781ba80b351c5ff4cdc54b229be212"
+    },
+    {
+      "path": "docs/TEST_REPORT.md",
+      "bytes": 5299,
+      "sha256": "caf9443393fa1512c26cb4d8579c72ab6887650fb63505f7b80ea5846146fdea"
+    },
+    {
+      "path": "docs/app_evolved.png",
+      "bytes": 143054,
+      "sha256": "d2ae09179c8b684548b2c049ca52cd56d29eb2d8ff7693e220471f9f92ae8398"
+    },
+    {
+      "path": "docs/app_initial.png",
+      "bytes": 160010,
+      "sha256": "efa8a6c3c6b07cbaa84cceaff48364bdef2142a9a20cedafd72acec43de5f081"
+    },
+    {
+      "path": "docs/app_mobile.png",
+      "bytes": 51505,
+      "sha256": "5b12deb844716566e36f67dca827dbf577c18fe4f2723e979b170dd789b908df"
+    },
+    {
+      "path": "launch.py",
+      "bytes": 2918,
+      "sha256": "611f3a5ceb8db9005ff9ae643345f941175b42efcfc2a54df4c5ad2ae3ea2e2c"
+    },
+    {
+      "path": "src/app.js",
+      "bytes": 18027,
+      "sha256": "70bc7b07feca2743757e5f441083edcffba01d7812df8c043c16ef06e8fcb31b"
+    },
+    {
+      "path": "src/core.js",
+      "bytes": 10297,
+      "sha256": "2897d5c9c408b6ddca030f1b766bf838a7d13565e7fd1032a39df08f0aef8ad1"
+    },
+    {
+      "path": "src/gpu.js",
+      "bytes": 5607,
+      "sha256": "d27e45b778f7483cc1d8d39f2b8907d9e90f81938f479a28cd73d75c70ebae36"
+    },
+    {
+      "path": "src/png.js",
+      "bytes": 2461,
+      "sha256": "4ce3731371c3a61d844ffe71dfbfee7febb77af673d33427c1c78e285969bbda"
+    },
+    {
+      "path": "src/shell.html",
+      "bytes": 12577,
+      "sha256": "cdde9c2ec08f8da03170692781570208e7c40a3158e20930b8ab1c97234356fa"
+    },
+    {
+      "path": "src/style.css",
+      "bytes": 9034,
+      "sha256": "5866928120876ef0571ce8e21823e4d4bd9bc6661e82d6537df3970c0a54bdf2"
+    },
+    {
+      "path": "src/worker.js",
+      "bytes": 4348,
+      "sha256": "999408c628292881e457cfc0ccb556ba448732c886d87fa692ecdd7f59276253"
+    },
+    {
+      "path": "tests/browser_results.json",
+      "bytes": 3258,
+      "sha256": "cd7eac03fd2fe83c7a82d860c3d9ce3a8d9d795e1d2b534778aee9d31d5ac902"
+    },
+    {
+      "path": "tests/browser_tests.py",
+      "bytes": 7181,
+      "sha256": "84f9b69eb9bf8464d154bcd35da491cf1da6dc1c36a09f9c90b43d2e99083239"
+    },
+    {
+      "path": "tests/core_results.json",
+      "bytes": 3683,
+      "sha256": "05248df0d3879831df2dfd664a3606dd2711af4d5926c667fcae013f43aa59fe"
+    },
+    {
+      "path": "tests/core_tests.js",
+      "bytes": 4100,
+      "sha256": "80c83abecff8fbe4c169b2b8422ea9bd122531b288c1c6e9ce1eb6dca89fec05"
+    },
+    {
+      "path": "tests/launcher_results.json",
+      "bytes": 289,
+      "sha256": "306c8675dccaca8688e2933c3c2f0a1ad0cc2cfa52b47c58cc65da4e121da447"
+    },
+    {
+      "path": "tests/png_results.json",
+      "bytes": 349,
+      "sha256": "9ac7c1f4aefb71bbcbf41cb7445a81ee026ae389fdba9a2e4512ddfe17e9e5a6"
+    },
+    {
+      "path": "tests/test_export_16.png",
+      "bytes": 6200,
+      "sha256": "bae9d5af35764979265e1250cef93f18c1cf6282d9f364a4713740f28b770f10"
+    },
+    {
+      "path": "tests/test_export_8.png",
+      "bytes": 4813,
+      "sha256": "88074382932cfc5bfa42a3b624c26c0c33b8f9d1fa859d12341d9332072dc0dd"
+    }
+  ]
+}

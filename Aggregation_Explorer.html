@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A local, seeded density-dependent aggregation experiment. Explore one pattern through time and export black-and-white masks.">
+<title>Aggregation Explorer · 0.1</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d3f3b'/%3E%3Ccircle cx='12' cy='14' r='6' fill='white'/%3E%3Ccircle cx='20' cy='20' r='7' fill='white'/%3E%3C/svg%3E">
+<style>:root{--ink:#202d2b;--muted:#697774;--border:#d7ddd8;--paper:#fff;--wash:#f0f1ec;--accent:#1f5950;--accent-light:#e9f0ec;--warn:#875829}
+*{box-sizing:border-box}body{margin:0;background:var(--wash);color:var(--ink);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer;color:var(--ink);border:1px solid #c9d2cd;background:#fff;padding:8px 12px;border-radius:6px;white-space:nowrap;transition:background .12s,box-shadow .12s}button:hover:not(:disabled){background:#edf3ef;border-color:#8fa59b}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #7ba598;outline-offset:2px}button:disabled{opacity:.46;cursor:default}.primary{background:var(--accent);border-color:var(--accent);color:#fff}.primary:hover:not(:disabled){background:#163e37;color:#fff}.quiet{background:transparent}.text-button{border:0;padding:3px 5px;background:transparent;color:var(--accent);font-size:12px}.wide{width:100%}.row{display:flex;gap:8px;align-items:center}.topbar{height:84px;padding:16px 26px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:#fafbf7}.brand{display:flex;gap:14px;align-items:center}.brand h1{font-size:24px;font-weight:600;letter-spacing:-.65px;margin:0}.brand p{font-size:9px;letter-spacing:2px;margin:3px 0 0;color:var(--muted)}.mark{position:relative;display:block;width:37px;height:38px}.mark i{position:absolute;background:var(--accent);width:23px;height:24px;border-radius:45% 50% 38% 43%;left:1px;top:2px;transform:rotate(-22deg)}.mark i:nth-child(2){left:14px;top:15px;width:24px;height:22px;transform:rotate(25deg)}.mark i:nth-child(3){left:27px;top:0;width:6px;height:7px}.version{color:var(--muted);font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 5px;margin-left:3px}.header-actions{display:flex;align-items:center;gap:16px}.badge{font-size:12px;display:flex;align-items:center;gap:7px}.dot{width:6px;height:6px;background:#4b826b;border-radius:50%}.workspace{display:grid;grid-template-columns:300px minmax(0,1fr);height:calc(100dvh - 84px);max-width:1920px;margin:auto}.controls{border-right:1px solid var(--border);background:#fcfcf9;overflow:auto;scrollbar-width:thin}.control-section{padding:20px 22px;border-bottom:1px solid var(--border)}.eyebrow{font-size:10px;letter-spacing:1.45px;color:#587169;font-weight:700}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}label{display:block;font-weight:550;font-size:12px;margin:13px 0 6px}input[type=number],select{width:100%;min-width:0;background:#fff;border:1px solid #cbd3ce;border-radius:5px;padding:8px 9px;color:var(--ink);height:36px}input[type=number]{font-variant-numeric:tabular-nums}.seed-row input{font-size:15px}.hint{font-size:11px;line-height:1.5;color:var(--muted);margin:7px 0 0}.reset-note{font-size:10px;color:var(--warn);background:#f6f1e7;padding:7px 9px;border-radius:4px;margin:16px 0 0}.label-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:15px}.label-row label{margin:0}.label-row output{font-size:12px;color:var(--accent);font-variant-numeric:tabular-nums;background:#eaf0eb;min-width:38px;text-align:center;padding:1px 5px;border-radius:4px}input[type=range]{width:100%;height:18px;margin:9px 0 0;accent-color:var(--accent);cursor:pointer}.check{display:flex;align-items:center;gap:7px;margin-top:14px}.check input{accent-color:var(--accent);width:15px;height:15px}.advanced summary{font-size:12px;font-weight:650;cursor:pointer}.advanced[open] summary{margin-bottom:12px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.form-grid label{font-size:11px}.form-grid input,.form-grid select{font-size:12px;padding:7px}.diagnostics{background:#f0f3ee;padding:10px;font-size:11px;margin-bottom:0}.diagnostics div{display:flex;justify-content:space-between;margin:3px 0}.diagnostics dd{margin:0;font-variant-numeric:tabular-nums}.export-section .primary{margin-top:14px}.export-section .row{margin-top:12px}.export-section .row button{font-size:12px;padding:7px 9px}.studio{min-width:0;min-height:0;padding:20px 24px 12px;display:flex;flex-direction:column;gap:14px}.viewer-card{background:#fff;display:flex;flex-direction:column;min-height:190px;flex:1;border:1px solid #ccd5cd;border-radius:10px;overflow:hidden;box-shadow:0 4px 12px #233d2b06}.viewer-toolbar{height:43px;flex-shrink:0;border-bottom:1px solid #e4e8e2;display:flex;align-items:center;justify-content:space-between;padding:0 18px}.subtle{font-size:11px;color:var(--muted);margin-left:12px}.canvas-area{background:#e9ede7;position:relative;flex:1;min-height:120px;display:flex;align-items:center;justify-content:center;padding:12px;overflow:hidden}.canvas-area canvas{display:block;max-width:100%;max-height:100%;background:#fff;box-shadow:0 1px 6px #233d2b12;object-fit:contain}.empty-message{position:absolute;color:var(--muted);font-size:13px;padding:20px;background:#ffffffeb}.metrics{display:flex;gap:35px;align-items:center;height:65px;flex-shrink:0;padding:9px 20px;border-top:1px solid #e4e8e2}.metric-name{display:block;font-size:9px;letter-spacing:1.2px;color:var(--muted)}.metrics strong{font-weight:500;font-size:23px;letter-spacing:-.8px;display:block;line-height:1.2;font-variant-numeric:tabular-nums}.metric-caption{font-size:10px;color:#8b9691;line-height:1.4;margin-left:auto;text-align:right}.timeline-card{padding:13px 18px 12px;background:#fcfcf9;border:1px solid #ccd5cd;border-radius:9px}.timeline-header{display:flex;justify-content:space-between;align-items:center;gap:10px}.inline-label{font-size:11px;color:var(--muted);margin:0;white-space:nowrap}#timeInput{width:94px;height:31px;padding:5px 8px;font-size:12px}.scrubber{position:relative;margin-top:5px;padding:0 2px}.scrubber input{position:relative;z-index:2;height:21px;margin-top:8px;background:transparent}.cache-ticks{position:absolute;left:9px;right:9px;top:12px;height:12px;pointer-events:none}.cache-ticks i{position:absolute;width:2px;height:12px;top:0;background:#b8cebd}.timeline-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin:0 3px 12px;font-variant-numeric:tabular-nums}.timeline-actions{display:flex;justify-content:space-between;gap:12px}.timeline-actions button{font-size:12px;padding:7px 11px}.bookmarks{display:flex;gap:6px;flex-wrap:wrap}.bookmarks:not(:empty){padding-top:10px}.bookmarks button{font-size:10px;padding:2px 7px;background:#edf2ed;color:#52736a;border-color:#dce5df}.status-bar{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted);min-height:18px;padding:0 2px}.status-bar span:first-child{color:#385d4c}#cacheStatus{white-space:nowrap}.notice{font-size:12px;border:1px solid #dfc297;background:#fff4df;color:#75521d;padding:10px 13px;border-radius:6px}.notice.error{color:#922e29;background:#fff1ed;border-color:#e3b9ae}dialog{width:min(680px,92vw);border:1px solid #c1cec4;border-radius:12px;padding:28px;max-height:87vh;color:var(--ink);box-shadow:0 24px 90px #0d22174d}dialog::backdrop{background:#132b2270;backdrop-filter:blur(3px)}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:16px}.dialog-head h2{font-weight:550;font-size:25px;letter-spacing:-.6px;margin:0}dialog p{font-size:13px;line-height:1.65}dialog pre{background:#eef3ee;padding:14px;border-radius:6px;font:12px/1.7 ui-monospace,Consolas,monospace;overflow:auto}a{color:var(--accent)}.studio:fullscreen{background:var(--wash);height:100vh;padding:20px}.studio:fullscreen .viewer-card{min-height:0}.controls :disabled{opacity:.5}
+@media(min-width:1550px){.workspace{grid-template-columns:320px minmax(0,1fr)}.control-section{padding:20px 25px}.studio{padding:24px 30px 16px}}
+@media(max-width:980px){.workspace{grid-template-columns:270px minmax(0,1fr)}.control-section{padding:17px}.studio{padding:14px;gap:10px}.metric-caption{display:none}.metrics{gap:22px}.timelineCaption,#timelineCaption{display:none}.timeline-actions{flex-wrap:wrap}.header-actions{gap:9px}.header-actions button{font-size:11px}.brand h1{font-size:21px}.status-bar{flex-wrap:wrap}.metrics strong{font-size:21px}.topbar{padding:14px 20px}}
+@media(max-width:680px){.topbar{height:76px;padding:10px 14px}.brand{gap:8px}.brand h1{font-size:18px}.brand p{font-size:8px;letter-spacing:1px}.mark{transform:scale(.8);width:32px}.header-actions .badge{display:none}.version{display:none}.workspace{height:auto;display:flex;flex-direction:column-reverse}.studio{height:calc(100svh - 76px);min-height:590px;padding:10px}.controls{border-right:0;overflow:visible}.control-section{padding:18px 22px}.metrics{height:57px;gap:25px;padding:8px 15px}.metrics strong{font-size:20px}.timeline-card{padding:10px 13px}.timeline-actions button{font-size:11px;padding:6px 8px}.timeline-actions{gap:7px}.row{gap:6px}#cacheStatus{display:none}.metric-name{font-size:8px}.header-actions button{padding:6px 8px}.viewer-toolbar{padding:0 12px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><div><h1>Aggregation Explorer</h1><p>SEEDED PATTERNS / EVOLVING SYSTEMS</p></div><span class="version">0.1</span></div>
+  <div class="header-actions"><span id="engineBadge" class="badge"><span class="dot"></span>Starting engine</span><button id="helpButton" class="quiet">About the model</button></div>
+</header>
+<main class="workspace">
+<aside class="controls" aria-label="Pattern settings">
+  <section class="control-section">
+    <div class="section-head"><span class="eyebrow">01 / STARTING POINT</span><button id="defaultsButton" class="text-button" title="Restore this app's starting preset.">Defaults</button></div>
+    <label for="seed">Seed</label><div class="row seed-row"><input id="seed" type="number" value="4281" min="0" max="4294967295" step="1"><button id="newSeed" title="Make a different starting arrangement. This resets the timeline.">New seed</button></div>
+    <p class="hint">One seed. One evolving family of shapes.</p>
+    <label for="preset">Starting character</label>
+    <select id="preset"><option value="balanced">Irregular patches</option><option value="small">Small scattered patches</option><option value="broad">Broad connected patches</option><option value="reference">Uniform perturbations · reference</option></select>
+    <div class="slider-control"><div class="label-row"><label for="radius">Initial patch scale</label><output id="radiusValue"></output></div><input id="radius" type="range" min="1.2" max="9" step="0.1"><p class="hint">Larger footprints, fewer starting patches. Model units.</p></div>
+    <div class="slider-control"><div class="label-row"><label for="coverage">Initial coverage target</label><output id="coverageValue"></output></div><input id="coverage" type="range" min="0.12" max="0.65" step="0.01"><p class="hint">Sets the amount of starting geometry; actual area is reported.</p></div>
+    <div class="slider-control"><div class="label-row"><label for="variation">Size variation</label><output id="variationValue"></output></div><input id="variation" type="range" min="0" max="1" step="0.05"><p class="hint">Similar sizes at the left; a broader mixture at the right.</p></div>
+    <div class="slider-control"><div class="label-row"><label for="irregularity">Starting irregularity</label><output id="irregularityValue"></output></div><input id="irregularity" type="range" min="0" max="0.8" step="0.05"><p class="hint">Lobes and uneven outlines in the starting patches only.</p></div>
+    <p class="reset-note">Starting-point changes create a new history.</p>
+  </section>
+  <section class="control-section">
+    <span class="eyebrow">02 / MASK APPEARANCE</span>
+    <div class="slider-control"><div class="label-row"><label for="threshold">Patch threshold</label><output id="thresholdValue">3.00</output></div><input id="threshold" type="range" min="0.25" max="10" step="0.05" value="3"><p class="hint">Higher values contract the black boundary. Does not change the simulation.</p></div>
+    <label class="check"><input id="invert" type="checkbox"><span>Invert black and white</span></label>
+  </section>
+  <details class="control-section advanced"><summary>Advanced model &amp; quality</summary>
+    <p class="hint">DDA coefficients follow Siteur et al. (2023). These controls change the experiment, not just its contrast.</p>
+    <div class="form-grid">
+      <div><label for="resolution">Simulation width</label><select id="resolution"><option value="128">128 · quick</option><option value="192" selected>192 · balanced</option><option value="256">256 · finer</option><option value="384">384 · slower</option><option value="512">512 · demanding</option></select></div>
+      <div><label for="aspect">Aspect ratio</label><select id="aspect"><option value="1">1 : 1</option><option value="1.5">3 : 2</option><option value="2">2 : 1</option><option value="0.75">3 : 4</option></select></div>
+      <div><label for="length">Domain width</label><input id="length" type="number" min="48" max="192" step="1"></div>
+      <div><label for="total">Material budget T</label><input id="total" type="number" min="2" max="7" step="0.1"></div>
+      <div><label for="a">Feedback a</label><input id="a" type="number" min="2" max="6" step="0.1"></div>
+      <div><label for="b">Feedback b</label><input id="b" type="number" min="0.5" max="2" step="0.1"></div>
+      <div><label for="da">Retained diffusion</label><input id="da" type="number" min="0.025" max="0.2" step="0.0025"></div>
+      <div><label for="db">Mobile diffusion</label><input id="db" type="number" min="0.5" max="2" step="0.1"></div>
+    </div>
+    <label for="boundary">Boundary</label><select id="boundary"><option value="closed">Closed · no material crosses the edge</option><option value="periodic">Periodic · opposite edges exchange</option></select>
+    <label for="accuracy">Numerical step</label><select id="accuracy"><option value="standard">Automatic conservative step</option><option value="fine">Fine · half the automatic step</option></select>
+    <label for="backend">Compute engine</label><select id="backend"><option value="auto">Automatic · try WebGPU, else CPU</option><option value="cpu">CPU worker</option><option value="gpu">WebGPU only</option></select>
+    <p class="hint">Changing the simulation grid rebuilds the experiment. A coarse grid may alter contours and slow or pin late-stage changes. PNG export does not rebuild the grid.</p>
+    <dl class="diagnostics"><div><dt>Time step</dt><dd id="dtReadout">—</dd></div><div><dt>Mean u + v</dt><dd id="massReadout">—</dd></div><div><dt>Relative drift</dt><dd id="driftReadout">—</dd></div><div><dt>State cache</dt><dd id="cacheReadout">—</dd></div></dl>
+    <p id="engineDetail" class="hint"></p>
+  </details>
+  <section class="control-section export-section">
+    <span class="eyebrow">03 / KEEP THIS STAGE</span>
+    <div class="form-grid"><div><label for="exportSize">PNG width</label><select id="exportSize"><option value="0">Simulation width</option><option value="512">512 px</option><option value="1024" selected>1024 px</option><option value="2048">2048 px</option><option value="4096">4096 px</option></select></div><div><label for="bitDepth">Precision</label><select id="bitDepth"><option value="8">8-bit gray</option><option value="16">16-bit gray</option></select></div></div>
+    <button id="exportButton" class="primary wide" disabled>Export selected mask</button>
+    <p class="hint">Single-channel, pure black/white PNG. Larger exports resample the current field before thresholding; they do not add simulated detail.</p>
+    <div class="row"><button id="saveSetup" class="wide" disabled>Save setup</button><button id="loadSetup" class="wide">Load setup</button></div><input type="file" id="setupFile" accept=".json,application/json" hidden>
+  </section>
+</aside>
+<section class="studio" aria-label="Simulation viewer">
+  <div class="viewer-card">
+    <div class="viewer-toolbar"><div><span class="eyebrow">PATTERN FIELD</span><span id="gridBadge" class="subtle">—</span></div><div class="row"><button id="fitButton" class="text-button" title="Fit the image to the viewport.">Fit</button><button id="fullscreenButton" class="text-button">Expand view</button></div></div>
+    <div id="canvasArea" class="canvas-area"><canvas id="preview" width="768" height="768" aria-label="Black and white aggregation mask"></canvas><div id="emptyMessage" class="empty-message">Preparing your starting pattern…</div></div>
+    <div class="metrics"><div><span class="metric-name">MODEL AGE</span><strong id="ageMetric">0.00</strong></div><div><span class="metric-name">PATCHES</span><strong id="patchMetric">—</strong></div><div><span class="metric-name">OCCUPIED AREA</span><strong id="areaMetric">—</strong></div><div class="metric-caption">Patch count uses four-neighbor connectivity<br>at the simulation grid, before inversion.</div></div>
+  </div>
+  <section class="timeline-card" aria-label="Evolution timeline">
+    <div class="timeline-header"><div><span class="eyebrow">EVOLUTION</span><span id="timelineCaption" class="subtle">The same starting point, farther along.</span></div><div class="row"><label class="inline-label" for="timeInput">Go to age</label><input id="timeInput" type="number" min="0" max="65536" step="0.1" value="0"></div></div>
+    <div class="scrubber"><div id="cacheTicks" class="cache-ticks" aria-hidden="true"></div><input id="evolution" type="range" min="0" max="1000" step="1" value="0" aria-label="Evolution stage" disabled></div>
+    <div id="timelineLabels" class="timeline-labels"></div>
+    <div class="timeline-actions"><div class="row"><button id="playButton" class="primary" disabled>Play</button><button id="resetButton" disabled>Return to start</button><button id="cancelButton" disabled>Stop calculation</button></div><div class="row"><button id="pinButton" disabled>Pin stage</button><button id="extendButton">Extend ×2</button><button id="endButton" disabled>Build to end</button></div></div>
+    <div id="bookmarks" class="bookmarks"></div>
+  </section>
+  <div class="status-bar"><span id="status" role="status" aria-live="polite">Initializing…</span><span id="cacheStatus">Local processing · no uploads</span></div>
+  <div id="notice" class="notice" role="alert" hidden></div>
+</section>
+</main>
+<dialog id="aboutDialog"><div class="dialog-head"><h2>A process, not a crossfade.</h2><button id="closeAbout" aria-label="Close model notes">Close</button></div>
+<p>Each seed defines the starting continuous fields. The <strong>density-dependent aggregation (DDA)</strong> equations exchange material between a slower retained field <em>u</em> and a faster mobile field <em>v</em>.</p>
+<pre>R = u·v − a·u / (b + u)
+u_next = u + dt · ( R + Da · Laplacian(u))
+v_next = v + dt · (−R + Db · Laplacian(v))</pre>
+<p>The calculation uses separate old/new states. Nothing is repeatedly blurred and thresholded into the next simulation step. Thresholding is display/export only.</p>
+<p><strong>What is adapted:</strong> seeded irregular starting patches, fixed starting material budget, synchronous numerical updates, cell-face boundaries, checkpoint replay, and the browser interface. The reference starting mode uses small paired perturbations rather than the notebook’s two independent noise fields.</p>
+<p><strong>What is not claimed:</strong> this is not the exact Texel dune-grass animation, a wind/sand-height simulation, a WM plug-in, or a scientifically calibrated terrain model. Coarsening can be slow; larger model age does not guarantee fewer components at every stage. Finite grids can affect late-time behavior.</p>
+<p>Moving backward restores continuous-field checkpoints and replays forward. Evicted cache entries are rebuilt from an earlier state. A setup saves the recipe and selected age, not the whole history. Results are repeatable within a fixed version, grid, and backend; CPU/GPU pixel identity is not guaranteed.</p>
+<p><strong>Source:</strong> Siteur et al. (2023), <em>Phase-separation physics underlies new theory for the resilience of patchy ecosystems</em>, PNAS 120(2), e2202683120. <a href="https://doi.org/10.1073/pnas.2202683120" target="_blank" rel="noopener noreferrer">Paper</a> · <a href="https://github.com/liuqx315/PS-Resilience-in-Ecosystems" target="_blank" rel="noopener noreferrer">Research repository</a>.</p>
+<p class="hint">This independently written explorer does not bundle the authors’ code or claim their endorsement. Ordinary use makes no network requests beyond loading the local app. External reference links open only when clicked.</p>
+</dialog>
+<script id="core-code">/* Aggregation Explorer 0.1.0 — independently written DDA equation implementation.
+ * Mathematical reference: Siteur et al. (2023), doi:10.1073/pnas.2202683120.
+ * Seeded patches, UI, cell-face boundaries and synchronous updates are adaptations.
+ * No research notebook source is bundled. See docs/MODEL.md.
+ */
+(function(root) {
+  'use strict';
+  const VERSION = 'dda-explorer-0.1.0';
+  const DEFAULTS = Object.freeze({seed:4281, resolution:192, aspect:1, length:96,
+    radius:1.8, coverage:0.24, variation:0.70, irregularity:0.35,
+    total:4, a:4, b:1, da:0.0625, db:1, boundary:'closed', init:'patches',
+    accuracy:'standard', backend:'auto'});
+  const LIMITS = {seed:[0,4294967295], resolution:[64,512], aspect:[0.5,2], length:[48,192],
+    radius:[1.2,9], coverage:[0.12,0.65], variation:[0,1], irregularity:[0,0.8],
+    total:[2,7], a:[2,6], b:[0.5,2], da:[0.025,0.2], db:[0.5,2]};
+  function validate(input) {
+    const c = {...DEFAULTS, ...input};
+    for (const [k,[lo,hi]] of Object.entries(LIMITS)) {
+      if (typeof c[k] !== 'number' || !Number.isFinite(c[k]) || c[k]<lo || c[k]>hi)
+        throw new Error(`${k} must be a finite number between ${lo} and ${hi}.`);
+    }
+    if (!Number.isInteger(c.seed) || !Number.isInteger(c.resolution)) throw new Error('Seed and resolution must be whole numbers.');
+    if (!['closed','periodic'].includes(c.boundary)) throw new Error('Unknown boundary mode.');
+    if (!['patches','perturbations'].includes(c.init)) throw new Error('Unknown starting mode.');
+    if (!['standard','fine'].includes(c.accuracy)) throw new Error('Unknown accuracy setting.');
+    if (!['auto','cpu','gpu'].includes(c.backend)) throw new Error('Unknown compute backend.');
+    return c;
+  }
+  function rng32(seed) {
+    let s=(seed>>>0)||0x6d2b79f5;
+    return function() {s ^= s<<13; s ^= s>>>17; s ^= s<<5; return (s>>>0)/4294967296;};
+  }
+  function smoothstep(lo,hi,x) {const t=Math.min(1,Math.max(0,(x-lo)/(hi-lo)));return t*t*(3-2*t);}
+  function dimensions(c) {
+    const nx=c.resolution, ny=Math.max(32,Math.round(nx/c.aspect));
+    return {nx,ny,lx:c.length,ly:c.length*ny/nx,hx:c.length/nx,hy:c.length/nx};
+  }
+  function equilibrium(total,a,b) {
+    const disc=(total-b)**2-4*(a-total*b);
+    if (disc<0) throw new Error('This material / feedback combination has no real positive uniform equilibrium. Use seeded patches or revise the coefficients.');
+    const u=(total-b+Math.sqrt(disc))/2, v=total-u;
+    if (!(u>0 && v>0)) throw new Error('The positive reference equilibrium does not exist for these settings.');
+    return [u,v];
+  }
+  function initialize(input) {
+    const config=validate(input), d=dimensions(config), {nx,ny,lx,ly,hx,hy}=d;
+    const N=nx*ny, data=new Float32Array(2*N), rand=rng32(config.seed);
+    let patchCount=0;
+    if (config.init==='perturbations') {
+      const [u0,v0]=equilibrium(config.total,config.a,config.b);
+      const noise=new Float64Array(N); let mean=0;
+      for(let i=0;i<N;i++) {noise[i]=(rand()-0.5)*0.1;mean+=noise[i]/N;}
+      for(let i=0;i<N;i++) {
+        const z=noise[i]-mean;
+        // Paired disturbances conserve the starting total; not the notebook's independent noise.
+        data[2*i]=u0+z; data[2*i+1]=v0-z;
+      }
+    } else {
+      const shape=new Float32Array(N);
+      const r=config.radius;
+      // Expected coverage of a random union. Actual coverage is reported, not forced.
+      patchCount=Math.max(2,Math.round(-Math.log(1-config.coverage)*lx*ly/(Math.PI*r*r*(1+0.6*config.variation**2))));
+      function stamp(cx,cy,rx,ry,angle,phase,rough) {
+        const limit=Math.max(rx,ry)*(1+rough)+hx*1.8;
+        const c=Math.cos(angle),s=Math.sin(angle),edge=Math.max(hx*1.25,0.18);
+        let xa=Math.floor((cx-limit)/hx),xb=Math.ceil((cx+limit)/hx);
+        let ya=Math.floor((cy-limit)/hy),yb=Math.ceil((cy+limit)/hy);
+        for(let yy=ya; yy<=yb; yy++) {
+          if(config.boundary==='closed' && (yy<0||yy>=ny)) continue;
+          const y=(yy%ny+ny)%ny,dy=(yy+0.5)*hy-cy;
+          for(let xx=xa; xx<=xb; xx++) {
+            if(config.boundary==='closed' && (xx<0||xx>=nx)) continue;
+            const x=(xx%nx+nx)%nx,dx=(xx+0.5)*hx-cx;
+            const ax=(c*dx+s*dy)/rx,ay=(-s*dx+c*dy)/ry;
+            const theta=Math.atan2(ay,ax);
+            const wobble=1+rough*(0.58*Math.sin(3*theta+phase)+0.28*Math.cos(5*theta-phase));
+            const dist=(Math.hypot(ax,ay)-wobble)*Math.min(rx,ry);
+            const g=1-smoothstep(-edge,edge,dist),i=y*nx+x;
+            if(g>shape[i]) shape[i]=g;
+          }
+        }
+      }
+      for(let j=0;j<patchCount;j++) {
+        const cx=rand()*lx,cy=rand()*ly;
+        const rr=r*Math.exp((rand()-0.5)*1.8*config.variation);
+        const stretch=1+(rand()-0.5)*0.65;
+        const angle=rand()*Math.PI*2,phase=rand()*Math.PI*2;
+        stamp(cx,cy,rr*stretch,rr/stretch,angle,phase,config.irregularity);
+        if(rand()<config.irregularity*0.7) {
+          const t=rand()*Math.PI*2;
+          stamp(cx+Math.cos(t)*rr*0.7,cy+Math.sin(t)*rr*0.7,rr*0.65,rr*0.52,t,phase,config.irregularity*0.7);
+        }
+      }
+      let meanG=0;for(const g of shape)meanG+=g/N;
+      if(meanG<1e-5) throw new Error('The starting patches are unresolved at this grid. Increase patch size or simulation resolution.');
+      const floor=0.025, mobile=Math.min(0.65, config.total*0.3);
+      const amplitude=(config.total-mobile-floor)/meanG;
+      for(let i=0;i<N;i++) {data[2*i]=floor+amplitude*shape[i];data[2*i+1]=mobile;}
+    }
+    const stats=inspect(data,nx,ny,3,config.boundary,false);
+    const maxD=Math.max(config.da,config.db);
+    // Conservative positivity-aware starting bound; dyadic time steps give stable step IDs.
+    const reactionBound=Math.max(32,stats.maxU*1.6,config.a/config.b);
+    const safe=0.72/(2*maxD*(1/hx**2+1/hy**2)+reactionBound);
+    let dt=0.02;
+    while(dt>safe) dt*=0.5;
+    if(config.accuracy==='fine') dt*=0.5;
+    return {config,...d,data,dt,initialMass:stats.mass,patchCount};
+  }
+  function neighbors(nx,ny,periodic) {
+    const xL=new Int32Array(nx),xR=new Int32Array(nx),yU=new Int32Array(ny),yD=new Int32Array(ny);
+    for(let x=0;x<nx;x++){xL[x]=x>0?x-1:(periodic?nx-1:0);xR[x]=x<nx-1?x+1:(periodic?0:nx-1);}
+    for(let y=0;y<ny;y++){yU[y]=(y>0?y-1:(periodic?ny-1:0))*nx;yD[y]=(y<ny-1?y+1:(periodic?0:ny-1))*nx;}
+    return {xL,xR,yU,yD};
+  }
+  class CPUSolver {
+    constructor(init) {this.init=init;this.data=init.data.slice();this.next=new Float32Array(this.data.length);this.step=0;this.backend='cpu';this.nb=neighbors(init.nx,init.ny,init.config.boundary==='periodic');}
+    advance(count) {
+      const {nx,ny,hx,hy,dt,config:c}=this.init, {xL,xR,yU,yD}=this.nb;
+      const ix=1/(hx*hx),iy=1/(hy*hy),{a,b,da,db}=c;
+      for(let n=0;n<count;n++) {
+        const src=this.data,dst=this.next;
+        for(let y=0;y<ny;y++) {
+          const row=y*nx,up=yU[y],down=yD[y];
+          for(let x=0;x<nx;x++) {
+            const i=2*(row+x),l=2*(row+xL[x]),r=2*(row+xR[x]),u=2*(up+x),d=2*(down+x);
+            const A=src[i],B=src[i+1];
+            const lapA=(src[l]-2*A+src[r])*ix+(src[u]-2*A+src[d])*iy;
+            const lapB=(src[l+1]-2*B+src[r+1])*ix+(src[u+1]-2*B+src[d+1])*iy;
+            const exchange=A*B-a*A/(b+A);
+            dst[i]=A+dt*(exchange+da*lapA);
+            dst[i+1]=B+dt*(-exchange+db*lapB);
+          }
+        }
+        this.next=src;this.data=dst;this.step++;
+      }
+    }
+    read(){return this.data.slice();}
+    restore(data,step){this.data.set(data);this.step=step;}
+    dispose(){}
+  }
+  function inspect(data,nx,ny,threshold=3,boundary='closed',components=true) {
+    const N=nx*ny;let mass=0,filled=0,maxU=-Infinity,minU=Infinity,minV=Infinity,maxV=-Infinity;
+    const mask=components?new Uint8Array(N):null;
+    for(let i=0;i<N;i++) {
+      const u=data[2*i],v=data[2*i+1];
+      if(!Number.isFinite(u)||!Number.isFinite(v)||u<0||v<0)
+        throw new Error(`Numerical check failed at cell ${i}: u=${u}, v=${v}. Nothing was clamped. Reset using Fine time steps or less extreme settings.`);
+      mass+=(u+v)/N;maxU=Math.max(maxU,u);minU=Math.min(minU,u);maxV=Math.max(maxV,v);minV=Math.min(minV,v);
+      const bit=+(u>=threshold);filled+=bit;if(mask)mask[i]=bit;
+    }
+    let patches=0,largest=0;
+    if(mask) {
+      const stack=new Int32Array(N),wrap=boundary==='periodic';
+      for(let i=0;i<N;i++) {
+        if(!mask[i])continue;
+        patches++;let head=0,tail=1,area=0;stack[0]=i;mask[i]=0;
+        while(head<tail){
+          const p=stack[head++],x=p%nx,y=(p/nx)|0;area++;
+          const adj=[x>0?p-1:(wrap?p+nx-1:-1),x<nx-1?p+1:(wrap?p-nx+1:-1),y>0?p-nx:(wrap?p+(ny-1)*nx:-1),y<ny-1?p+nx:(wrap?p-(ny-1)*nx:-1)];
+          for(const q of adj)if(q>=0&&mask[q]){mask[q]=0;stack[tail++]=q;}
+        }
+        largest=Math.max(largest,area);
+      }
+    }
+    return {mass,coverage:filled/N,patches,largest,maxU,minU,minV,maxV};
+  }
+  class CheckpointCache {
+    constructor(bytesPerState,budget=48*1024*1024){this.limit=Math.max(2,Math.min(96,Math.floor(budget/bytesPerState)));this.map=new Map();this.clock=0;}
+    put(step,data) {this.map.set(step,{data:data.slice(),used:++this.clock});while(this.map.size>this.limit){let victim=-1,old=Infinity;for(const [s,c]of this.map)if(s!==0&&s!==step&&c.used<old){victim=s;old=c.used;}if(victim<0)break;this.map.delete(victim);}}
+    best(target){let found=-1;for(const s of this.map.keys())if(s<=target&&s>found)found=s;if(found<0)return null;const c=this.map.get(found);c.used=++this.clock;return {step:found,data:c.data};}
+    keys(){return [...this.map.keys()].sort((a,b)=>a-b);}
+  }
+  function sampleU(data,nx,ny,x,y,periodic=false) {
+    let x0=Math.floor(x),y0=Math.floor(y),tx=x-x0,ty=y-y0;
+    let x1=x0+1,y1=y0+1;
+    const bound=(i,n)=>periodic?(i%n+n)%n:Math.max(0,Math.min(n-1,i));
+    x0=bound(x0,nx);x1=bound(x1,nx);y0=bound(y0,ny);y1=bound(y1,ny);
+    const a=data[2*(y0*nx+x0)],b=data[2*(y0*nx+x1)],c=data[2*(y1*nx+x0)],d=data[2*(y1*nx+x1)];
+    return (a+(b-a)*tx)*(1-ty)+(c+(d-c)*tx)*ty;
+  }
+  const api={VERSION,DEFAULTS,LIMITS,validate,rng32,smoothstep,dimensions,equilibrium,initialize,CPUSolver,inspect,CheckpointCache,sampleU};
+  root.AggregationCore=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
+</script>
+<script id="gpu-code" type="text/plain">/* Browser GPU version of the same DDA update. Explicit old/new state, no in-place neighbor writes. */
+(function(root) {
+  'use strict';
+  const SHADER = `
+struct Params {
+  nx: u32, ny: u32, boundary: u32, reserved: u32,
+  a: f32, b: f32, da: f32, db: f32,
+  dt: f32, ix: f32, iy: f32, pad: f32,
+};
+@group(0) @binding(0) var<storage, read> oldState: array<vec2<f32>>;
+@group(0) @binding(1) var<storage, read_write> newState: array<vec2<f32>>;
+@group(0) @binding(2) var<uniform> p: Params;
+fn at(x: i32, y: i32) -> vec2<f32> {
+  let w = i32(p.nx); let h = i32(p.ny);
+  var xx = clamp(x, 0, w - 1); var yy = clamp(y, 0, h - 1);
+  if (p.boundary == 1u) { xx = (x + w) % w; yy = (y + h) % h; }
+  return oldState[u32(yy) * p.nx + u32(xx)];
+}
+@compute @workgroup_size(8, 8)
+fn evolve(@builtin(global_invocation_id) gid: vec3<u32>) {
+  if (gid.x >= p.nx || gid.y >= p.ny) { return; }
+  let x = i32(gid.x); let y = i32(gid.y); let i = gid.y * p.nx + gid.x;
+  let uv = oldState[i];
+  let lap = (at(x-1,y) - 2.0*uv + at(x+1,y))*p.ix
+          + (at(x,y-1) - 2.0*uv + at(x,y+1))*p.iy;
+  let exchange = uv.x*uv.y - p.a*uv.x/(p.b+uv.x);
+  newState[i] = uv + p.dt * vec2<f32>(exchange+p.da*lap.x, -exchange+p.db*lap.y);
+}
+`;
+  let devicePromise=null;
+  async function getDevice() {
+    if(!devicePromise) devicePromise=(async()=>{
+      if(!navigator.gpu) throw new Error('WebGPU is not exposed in this browser context.');
+      const adapter=await navigator.gpu.requestAdapter({powerPreference:'high-performance'});
+      if(!adapter)throw new Error('No WebGPU adapter is available.');
+      const device=await adapter.requestDevice();
+      return {device,adapter};
+    })();
+    return devicePromise;
+  }
+  class GPUSolver {
+    static async create(init) {
+      const {device,adapter}=await getDevice();
+      const s=new GPUSolver(init,device,adapter);
+      device.pushErrorScope('validation');
+      try {
+        const module=device.createShaderModule({label:'DDA equations',code:SHADER});
+        const info=await module.getCompilationInfo();
+        const errors=info.messages.filter(m=>m.type==='error');
+        if(errors.length)throw new Error(errors.map(m=>`WGSL line ${m.lineNum}: ${m.message}`).join('\n'));
+        s.pipeline=await device.createComputePipelineAsync({label:'DDA synchronous Euler',layout:'auto',compute:{module,entryPoint:'evolve'}});
+        const layout=s.pipeline.getBindGroupLayout(0);
+        s.groups=[0,1].map(i=>device.createBindGroup({layout,entries:[
+          {binding:0,resource:{buffer:s.buffers[i]}},
+          {binding:1,resource:{buffer:s.buffers[1-i]}},
+          {binding:2,resource:{buffer:s.uniform}}
+        ]}));
+        const error=await device.popErrorScope();if(error)throw new Error(error.message);
+        return s;
+      } catch(e) {try{await device.popErrorScope();}catch(_){}s.dispose();throw e;}
+    }
+    constructor(init,device,adapter) {
+      this.init=init;this.device=device;this.backend='gpu';this.step=0;this.side=0;this.failure=null;this.disposed=false;
+      this.description=adapter.info?`${adapter.info.vendor||''} ${adapter.info.architecture||''}`.trim():'';
+      const size=init.data.byteLength;
+      this.buffers=[0,1].map(()=>device.createBuffer({size,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.COPY_DST}));
+      this.staging=device.createBuffer({size,usage:GPUBufferUsage.MAP_READ|GPUBufferUsage.COPY_DST});
+      this.uniform=device.createBuffer({size:48,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST});
+      const params=new ArrayBuffer(48),u=new Uint32Array(params),f=new Float32Array(params);
+      u[0]=init.nx;u[1]=init.ny;u[2]=+(init.config.boundary==='periodic');
+      f[4]=init.config.a;f[5]=init.config.b;f[6]=init.config.da;f[7]=init.config.db;
+      f[8]=init.dt;f[9]=1/init.hx**2;f[10]=1/init.hy**2;
+      device.queue.writeBuffer(this.uniform,0,params);device.queue.writeBuffer(this.buffers[0],0,init.data);
+      this.onError=e=>{if(!this.disposed)this.failure=new Error(`WebGPU validation: ${e.error.message}`);};
+      device.addEventListener('uncapturederror',this.onError);
+      device.lost.then(info=>{if(!this.disposed)this.failure=new Error(`WebGPU device lost: ${info.message||info.reason}. Reset to restart; the backend was not silently changed.`);});
+    }
+    async advance(count) {
+      if(this.failure)throw this.failure;
+      const encoder=this.device.createCommandEncoder();
+      const pass=encoder.beginComputePass();pass.setPipeline(this.pipeline);
+      for(let i=0;i<count;i++) {pass.setBindGroup(0,this.groups[this.side]);pass.dispatchWorkgroups(Math.ceil(this.init.nx/8),Math.ceil(this.init.ny/8));this.side=1-this.side;}
+      pass.end();this.device.queue.submit([encoder.finish()]);this.step+=count;
+    }
+    async read() {
+      if(this.failure)throw this.failure;
+      const encoder=this.device.createCommandEncoder();
+      encoder.copyBufferToBuffer(this.buffers[this.side],0,this.staging,0,this.init.data.byteLength);
+      this.device.queue.submit([encoder.finish()]);
+      await this.staging.mapAsync(GPUMapMode.READ);
+      const copy=new Float32Array(this.staging.getMappedRange().slice(0));this.staging.unmap();
+      if(this.failure)throw this.failure;return copy;
+    }
+    restore(data,step) {if(this.failure)throw this.failure;this.side=0;this.device.queue.writeBuffer(this.buffers[0],0,data);this.step=step;}
+    dispose() {this.disposed=true;this.device.removeEventListener('uncapturederror',this.onError);for(const b of [...this.buffers,this.staging,this.uniform])b.destroy();}
+  }
+  root.AggregationGPU={GPUSolver,SHADER};
+})(globalThis);
+</script>
+<script id="worker-code" type="text/plain">/* A single serialized pump owns the solver. UI messages only change intent. */
+'use strict';
+const C=AggregationCore;
+let solver=null,initial=null,cache=null,pendingInit=null,runId=0,target=0;
+let busy=false,scheduled=false,renderWanted=false,halted=false,lastSend=0,maximum=0;
+let view={threshold:3,invert:false},requestId=0,checkpointEvery=1,engineNotice='';
+function schedule(){if(!scheduled&&!busy){scheduled=true;setTimeout(pump,0);}}
+self.onmessage=e=>{
+  const m=e.data;
+  if(m.type==='init'){pendingInit=m;halted=false;schedule();return;}
+  if(m.runId!==runId)return;
+  if(m.type==='seek'&&initial){target=Math.max(0,Math.round(m.time/initial.dt));requestId=m.requestId;renderWanted=true;halted=false;}
+  if(m.type==='stop'&&solver){target=solver.step;requestId=m.requestId;renderWanted=true;}
+  if(m.type==='view'){view={...view,...m.view};renderWanted=true;}
+  if(m.type==='inspect'){renderWanted=true;}
+  schedule();
+};
+async function send(data,force=false) {
+  if(!solver||pendingInit)return;
+  const stats=C.inspect(data,initial.nx,initial.ny,view.threshold,initial.config.boundary,true);
+  stats.drift=(stats.mass-initial.initialMass)/initial.initialMass;
+  if(Math.abs(stats.drift)>0.01)throw new Error('Material-balance drift exceeded 1%. The run was stopped rather than renormalized. Use Fine time steps / a shorter run.');
+  const payload={type:'frame',runId,requestId,step:solver.step,time:solver.step*initial.dt,
+    targetTime:target*initial.dt,dt:initial.dt,done:solver.step===target,
+    nx:initial.nx,ny:initial.ny,backend:solver.backend,description:solver.description||'',engineNotice,
+    maxTime:maximum*initial.dt,cacheTimes:cache.keys().map(s=>s*initial.dt),
+    cacheBytes:cache.map.size*data.byteLength,initialMass:initial.initialMass,stats,data};
+  self.postMessage(payload,[data.buffer]);lastSend=performance.now();renderWanted=false;
+}
+async function pump() {
+  scheduled=false;if(busy)return;busy=true;
+  try {
+    if(pendingInit) {
+      const m=pendingInit;pendingInit=null;
+      if(solver)solver.dispose();solver=null;initial=null;cache=null;
+      runId=m.runId;requestId=m.requestId||0;view={threshold:3,invert:false,...m.view};
+      initial=C.initialize(m.config);maximum=0;lastSend=0;engineNotice='';
+      if(initial.config.backend!=='cpu') {
+        try {solver=await AggregationGPU.GPUSolver.create(initial);}
+        catch(e){if(initial.config.backend==='gpu')throw e;engineNotice=`CPU fallback: ${e.message}`;solver=new C.CPUSolver(initial);}
+      } else solver=new C.CPUSolver(initial);
+      if(pendingInit)return;
+      cache=new C.CheckpointCache(initial.data.byteLength);cache.put(0,initial.data);
+      checkpointEvery=Math.max(1,Math.round(4/initial.dt));
+      target=Math.max(0,Math.round((m.time||0)/initial.dt));renderWanted=true;halted=false;
+      self.postMessage({type:'ready',runId,dt:initial.dt,nx:initial.nx,ny:initial.ny,
+        backend:solver.backend,config:initial.config,engineNotice,patchCount:initial.patchCount});
+      await send(initial.data.slice(),true);
+      return;
+    }
+    if(!solver||halted)return;
+    const best=cache.best(target);
+    if(best && (solver.step>target || (best.step>solver.step && best.step<=target))) {
+      solver.restore(best.data,best.step);renderWanted=true;
+    }
+    if(solver.step<target) {
+      const nextCheckpoint=(Math.floor(solver.step/checkpointEvery)+1)*checkpointEvery;
+      const batch=Math.min(target-solver.step,nextCheckpoint-solver.step,solver.backend==='gpu'?128:32);
+      await solver.advance(batch);maximum=Math.max(maximum,solver.step);
+      const atCheckpoint=solver.step%checkpointEvery===0;
+      const due=performance.now()-lastSend>110||solver.step===target;
+      if(atCheckpoint||due) {
+        const data=await solver.read();
+        // Integrity checks do not depend on display threshold.
+        C.inspect(data,initial.nx,initial.ny,view.threshold,initial.config.boundary,false);
+        if(atCheckpoint)cache.put(solver.step,data);
+        if(due)await send(data,true);
+      }
+    } else if(renderWanted) await send(await solver.read(),true);
+  } catch(e) {
+    halted=true;if(solver)target=solver.step;
+    self.postMessage({type:'error',runId,message:e.message||String(e)});
+  } finally {
+    busy=false;
+    if(pendingInit||(!halted&&solver&&(solver.step!==target||renderWanted)))schedule();
+  }
+}
+</script>
+<script>/* Small grayscale PNG encoder. No third-party dependency; zlib stored-block fallback. */
+(function(root){
+  'use strict';
+  const crcTable=new Uint32Array(256);
+  for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?0xedb88320^(c>>>1):c>>>1;crcTable[n]=c>>>0;}
+  function crc32(a){let c=0xffffffff;for(const b of a)c=crcTable[(c^b)&255]^(c>>>8);return (c^0xffffffff)>>>0;}
+  function concat(arrays){const out=new Uint8Array(arrays.reduce((s,a)=>s+a.length,0));let at=0;for(const a of arrays){out.set(a,at);at+=a.length;}return out;}
+  function u32(v){const a=new Uint8Array(4);new DataView(a.buffer).setUint32(0,v);return a;}
+  function chunk(name,data){const tag=new TextEncoder().encode(name),body=concat([tag,data]);return concat([u32(data.length),body,u32(crc32(body))]);}
+  function storedZlib(data){
+    const pieces=[new Uint8Array([0x78,0x01])];
+    for(let i=0;i<data.length;i+=65535){const len=Math.min(65535,data.length-i),inv=(~len)&65535;pieces.push(new Uint8Array([+(i+len===data.length),len&255,len>>>8,inv&255,inv>>>8]),data.subarray(i,i+len));}
+    let a=1,b=0;for(let i=0;i<data.length;i++){a=(a+data[i])%65521;b=(b+a)%65521;}
+    pieces.push(u32(((b<<16)|a)>>>0));return concat(pieces);
+  }
+  async function encode(gray,width,height,depth=8,metadata='') {
+    const bytes=depth/8;if(![8,16].includes(depth)||gray.length!==width*height*bytes)throw new Error('Invalid grayscale PNG dimensions.');
+    const row=width*bytes,raw=new Uint8Array((row+1)*height);
+    for(let y=0;y<height;y++)raw.set(gray.subarray(y*row,(y+1)*row),y*(row+1)+1);
+    let compressed;
+    if(typeof CompressionStream!=='undefined') {
+      const stream=new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate'));
+      compressed=new Uint8Array(await new Response(stream).arrayBuffer());
+    } else compressed=storedZlib(raw);
+    const header=new Uint8Array(13),dv=new DataView(header.buffer);dv.setUint32(0,width);dv.setUint32(4,height);header[8]=depth;header[9]=0;
+    const chunks=[new Uint8Array([137,80,78,71,13,10,26,10]),chunk('IHDR',header)];
+    if(metadata)chunks.push(chunk('tEXt',new TextEncoder().encode('Description\0'+metadata.replace(/[^\x20-\x7e]/g,' '))));
+    chunks.push(chunk('IDAT',compressed),chunk('IEND',new Uint8Array()));
+    return new Blob(chunks,{type:'image/png'});
+  }
+  root.AggregationPNG={encode,crc32,storedZlib};if(typeof module!=='undefined'&&module.exports)module.exports=root.AggregationPNG;
+})(globalThis);
+</script>
+<script>(function(){
+  'use strict';
+  const C=AggregationCore,$=id=>document.getElementById(id);
+  const CONFIG_IDS=['seed','resolution','aspect','length','radius','coverage','variation','irregularity','total','a','b','da','db','boundary','accuracy','backend'];
+  const STR_IDS=new Set(['boundary','accuracy','backend']);
+  let config={...C.DEFAULTS},view={threshold:3,invert:false},horizon=512,runId=0,requestId=0,ready=false;
+  let frame=null,playing=false,playTimer=null,changeTimer=null,paintPending=false,bookmarks=[],fatal=false,exporting=false;
+  const workerURL=URL.createObjectURL(new Blob([
+    $('core-code').textContent+'\n'+$('gpu-code').textContent+'\n'+$('worker-code').textContent
+  ],{type:'text/javascript'}));
+  let worker;
+  try {worker=new Worker(workerURL);} catch(e){showNotice(`The simulation worker could not start: ${e.message}. Use the included local launcher.`,true);return;}
+  URL.revokeObjectURL(workerURL);
+  const canvas=$('preview'),context=canvas.getContext('2d',{alpha:false});
+  function showNotice(message,error=false){$('notice').hidden=!message;$('notice').textContent=message;$('notice').classList.toggle('error',error);}
+  function fmt(n,d=2){return Number(n).toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d});}
+  function timeAt(v){return Math.expm1(Number(v)/1000*Math.log1p(horizon));}
+  function sliderAt(t){return Math.log1p(Math.max(0,t))/Math.log1p(horizon)*1000;}
+  function updateOutputs(){
+    $('radiusValue').textContent=Number($('radius').value).toFixed(1);
+    for(const id of ['coverage','variation','irregularity'])$(id+'Value').textContent=Math.round(Number($(id).value)*100)+'%';
+    $('thresholdValue').textContent=Number($('threshold').value).toFixed(2);
+  }
+  function writeControls(c){for(const id of CONFIG_IDS)$(id).value=String(c[id]);updateOutputs();setInitControls();}
+  function setInitControls(){const ref=$('preset').value==='reference';for(const k of ['radius','coverage','variation','irregularity'])$(k).disabled=ref;}
+  function readControls(){const c={...config};for(const id of CONFIG_IDS)c[id]=STR_IDS.has(id)?$(id).value:Number($(id).value);c.init=$('preset').value==='reference'?'perturbations':'patches';return C.validate(c);}
+  function setBusy(b){
+    $('exportButton').disabled=b||!frame||fatal||exporting;$('saveSetup').disabled=b||!frame||fatal;$('pinButton').disabled=b||!frame||fatal;
+    $('cancelButton').disabled=!b||!ready||fatal;
+  }
+  function stopPlay(){playing=false;clearTimeout(playTimer);$('playButton').textContent='Play';}
+  function reset(c,time=0,keepPins=false){
+    try{C.validate(c);}catch(e){showNotice('Settings not applied: '+e.message,true);return;}
+    clearTimeout(changeTimer);stopPlay();config={...c};runId++;requestId++;ready=false;frame=null;fatal=false;
+    if(!keepPins){bookmarks=[];renderPins();}
+    $('evolution').disabled=true;$('playButton').disabled=true;$('resetButton').disabled=true;$('endButton').disabled=true;
+    $('evolution').value=sliderAt(time);$('timeInput').value=time.toFixed(2);setBusy(true);
+    $('status').textContent='Preparing the starting fields…';$('emptyMessage').hidden=false;$('emptyMessage').textContent='Preparing your starting pattern…';
+    $('engineBadge').innerHTML='<span class="dot"></span>Starting engine';showNotice('');
+    worker.postMessage({type:'init',runId,requestId,config,view,time});
+  }
+  function applyControls(){try{const c=readControls();reset(c);}catch(e){showNotice('Settings not applied: '+e.message,true);}}
+  function scheduleChange(){updateOutputs();setBusy(true);clearTimeout(changeTimer);stopPlay();changeTimer=setTimeout(applyControls,280);}
+  function requestTime(time,manual=true){
+    if(!ready||fatal)return;
+    if(manual)stopPlay();
+    time=Math.max(0,Math.min(65536,Number(time)||0));
+    while(time>horizon&&horizon<65536)horizon=Math.min(65536,horizon*2);
+    updateTimelineLabels();requestId++;
+    $('evolution').value=sliderAt(time);$('timeInput').value=time.toFixed(2);
+    setBusy(true);$('status').textContent=`Calculating model age ${fmt(time)}…`;
+    worker.postMessage({type:'seek',runId,requestId,time});
+  }
+  function requestStop(){stopPlay();requestId++;worker.postMessage({type:'stop',runId,requestId});}
+  function playNext(){
+    if(!playing||!frame||fatal)return;
+    if(frame.time>=horizon-frame.dt/2){stopPlay();return;}
+    const p=Math.min(1000,sliderAt(frame.time)+5);
+    requestTime(Math.min(horizon,Math.max(frame.time+frame.dt,timeAt(p))),false);
+  }
+  function updateTimelineLabels(){
+    $('timelineLabels').replaceChildren();
+    for(let i=0;i<=4;i++){const s=document.createElement('span');const t=timeAt(i*250);s.textContent=t<10?fmt(t,1):fmt(t,0);$('timelineLabels').appendChild(s);}
+    $('timelineCaption').textContent=`0–${fmt(horizon,0)} model units · logarithmic scrub`;
+    $('extendButton').disabled=horizon>=65536;
+  }
+  function renderPins(){
+    $('bookmarks').replaceChildren();for(const t of bookmarks){const b=document.createElement('button');b.textContent='Age '+fmt(t);b.title='Return to this pinned stage';b.onclick=()=>requestTime(t);$('bookmarks').appendChild(b);}
+  }
+  function fit(){
+    const area=$('canvasArea'),r=frame?frame.nx/frame.ny:config.aspect;
+    const w=Math.max(64,Math.min(area.clientWidth-24,(area.clientHeight-24)*r));
+    const h=w/r;canvas.style.width=w+'px';canvas.style.height=h+'px';
+    const internal=Math.max(256,Math.min(1024,Math.round(w*1.4)));
+    canvas.width=internal;canvas.height=Math.round(internal/r);queuePaint();
+  }
+  function grayMask(width,height,depth=8,sourceFrame=frame,sourceView=view,sourceConfig=config){
+    if(!sourceFrame)throw new Error('No completed state is available.');
+    const {data,nx,ny}=sourceFrame,threshold=sourceView.threshold,wrap=sourceConfig.boundary==='periodic',bytes=depth/8;
+    const out=new Uint8Array(width*height*bytes);
+    const left=new Int32Array(width),right=new Int32Array(width),frac=new Float64Array(width);
+    const bound=(i,n)=>wrap?(i%n+n)%n:Math.max(0,Math.min(n-1,i));
+    for(let x=0;x<width;x++){const gx=(x+0.5)*nx/width-0.5,ix=Math.floor(gx);left[x]=bound(ix,nx);right[x]=bound(ix+1,nx);frac[x]=gx-ix;}
+    for(let y=0;y<height;y++){
+      const gy=(y+0.5)*ny/height-0.5,iy=Math.floor(gy),fy=gy-iy;
+      const row0=bound(iy,ny)*nx,row1=bound(iy+1,ny)*nx;
+      for(let x=0;x<width;x++){
+        const a=data[2*(row0+left[x])],b=data[2*(row0+right[x])],c=data[2*(row1+left[x])],d=data[2*(row1+right[x])],fx=frac[x];
+        const sample=(a+(b-a)*fx)*(1-fy)+(c+(d-c)*fx)*fy;
+        let value=sample>=threshold?0:255;if(sourceView.invert)value=255-value;
+        const i=(y*width+x)*bytes;out[i]=value;if(bytes===2)out[i+1]=value;
+      }
+    }
+    return out;
+  }
+  function queuePaint(){if(!paintPending){paintPending=true;requestAnimationFrame(paint);}}
+  function paint(){
+    paintPending=false;if(!frame){context.fillStyle='#ffffff';context.fillRect(0,0,canvas.width,canvas.height);return;}
+    const g=grayMask(canvas.width,canvas.height),image=context.createImageData(canvas.width,canvas.height),rgba=image.data;
+    for(let i=0;i<g.length;i++){const j=i*4;rgba[j]=g[i];rgba[j+1]=g[i];rgba[j+2]=g[i];rgba[j+3]=255;}
+    context.putImageData(image,0,0);
+  }
+  function recipe(){return {format:'aggregation-explorer-setup',version:C.VERSION,
+    config:{...config,backend:frame?frame.backend:config.backend},view:{...view},
+    time:frame?frame.time:0,step:frame?frame.step:0,dt:frame?frame.dt:null,horizon,bookmarks:[...bookmarks],
+    note:'Recipe only; continuous fields and cached history are rebuilt. Backend is saved explicitly for reproducibility.'};}
+  async function saveBlob(blob,name,description,mime,extension){
+    if(window.showSaveFilePicker){
+      try{const handle=await window.showSaveFilePicker({suggestedName:name,types:[{description,accept:{[mime]:[extension]}}]});const stream=await handle.createWritable();await stream.write(blob);await stream.close();return;}
+      catch(e){if(e.name==='AbortError')return;if(!['SecurityError','NotAllowedError','TypeError'].includes(e.name))throw e;}
+    }
+    const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+  }
+  async function exportMask(){
+    if(!frame||!frame.done||fatal)return;
+    try {
+      stopPlay();exporting=true;$('exportButton').disabled=true;
+      const selected=frame,selectedView={...view},selectedConfig={...config},selectedRecipe=recipe();
+      const width=Number($('exportSize').value)||selected.nx,height=Math.round(width*selected.ny/selected.nx),depth=Number($('bitDepth').value);
+      $('status').textContent=`Encoding ${width} × ${height} grayscale PNG…`;
+      await new Promise(r=>setTimeout(r,10));
+      const g=grayMask(width,height,depth,selected,selectedView,selectedConfig),meta=JSON.stringify({...selectedRecipe,output:{width,height,depth,type:'grayscale',polarity:selectedView.invert?'white patches':'black patches',resampling:'bilinear u then fixed threshold',range:depth===8?[0,255]:[0,65535]}});
+      const blob=await AggregationPNG.encode(g,width,height,depth,meta);
+      const name=`aggregation_seed-${selectedConfig.seed}_age-${selected.time.toFixed(2)}_${width}x${height}_${depth}bit.png`;
+      await saveBlob(blob,name,'Grayscale PNG','image/png','.png');
+      $('status').textContent='PNG export prepared. The simulation state was not changed.';
+    } catch(e){showNotice('Export failed: '+e.message,true);}finally{exporting=false;setBusy(!frame?.done);}
+  }
+  async function importRecipe(obj){
+    if(obj.format!=='aggregation-explorer-setup'||obj.version!==C.VERSION)throw new Error('This is not a compatible 0.1.0 Aggregation Explorer setup.');
+    const c=C.validate(obj.config);
+    if(!obj.view||!Number.isFinite(obj.view.threshold)||obj.view.threshold<0.25||obj.view.threshold>10||typeof obj.view.invert!=='boolean')throw new Error('Invalid saved mask appearance.');
+    if(!Number.isFinite(obj.time)||obj.time<0||obj.time>65536)throw new Error('Invalid saved model age.');
+    view={threshold:obj.view.threshold,invert:obj.view.invert};$('threshold').value=view.threshold;$('invert').checked=view.invert;
+    horizon=Math.max(512,Math.min(65536,Number(obj.horizon)||512));while(horizon<obj.time)horizon=Math.min(65536,horizon*2);
+    bookmarks=Array.isArray(obj.bookmarks)?obj.bookmarks.filter(t=>Number.isFinite(t)&&t>=0&&t<=65536).slice(0,12):[];
+    $('preset').value=c.init==='perturbations'?'reference':'balanced';writeControls(c);renderPins();updateTimelineLabels();reset(c,obj.time,true);
+  }
+  worker.onmessage=e=>{
+    const m=e.data;if(m.runId!==runId)return;
+    if(m.type==='ready'){
+      ready=true;worker.postMessage({type:'view',runId,view});$('evolution').disabled=false;$('playButton').disabled=false;$('resetButton').disabled=false;$('endButton').disabled=false;
+      $('gridBadge').textContent=`${m.nx} × ${m.ny} simulation · ${config.length} model units wide`;
+      $('dtReadout').textContent=m.dt.toFixed(5);
+      $('engineBadge').innerHTML='<span class="dot"></span>'+(m.backend==='gpu'?'WebGPU compute':'CPU worker');
+      $('engineDetail').textContent=m.engineNotice||'GPU calculation available. No cloud service is involved.';
+      if(m.backend==='cpu'&&!m.engineNotice)$('engineDetail').textContent='CPU worker selected. Calculation runs separately from the interface.';
+    }
+    if(m.type==='error'){
+      fatal=true;stopPlay();showNotice(m.message,true);$('status').textContent='Run stopped. Revise settings and reset; no invalid result was exported.';setBusy(false);
+      $('emptyMessage').hidden=!!frame;$('emptyMessage').textContent='The run could not start. See the message below.';
+      $('evolution').disabled=true;$('playButton').disabled=true;$('endButton').disabled=true;
+    }
+    if(m.type==='frame'){
+      // Ignore frames for a seek that has already been superseded by the UI.
+      if(m.requestId!==requestId)return;
+      const sizeChanged=!frame||frame.nx!==m.nx||frame.ny!==m.ny;frame=m;
+      $('emptyMessage').hidden=true;if(sizeChanged)fit();else queuePaint();
+      $('ageMetric').textContent=fmt(m.time);$('patchMetric').textContent=m.stats.patches.toLocaleString();$('areaMetric').textContent=fmt(m.stats.coverage*100,1)+'%';
+      $('massReadout').textContent=m.stats.mass.toFixed(6);$('driftReadout').textContent=(m.stats.drift*100).toExponential(2)+'%';
+      $('cacheReadout').textContent=`${m.cacheTimes.length} states · ${(m.cacheBytes/1048576).toFixed(1)} MiB`;
+      $('cacheStatus').textContent=`Calculated through age ${fmt(m.maxTime,1)}`;
+      $('cacheTicks').replaceChildren();for(const t of m.cacheTimes){if(t>horizon)continue;const tick=document.createElement('i');tick.style.left=(sliderAt(t)/10)+'%';$('cacheTicks').appendChild(tick);}
+      if(m.done){$('evolution').value=sliderAt(m.time);if(document.activeElement!==$('timeInput'))$('timeInput').value=m.time.toFixed(2);}
+      setBusy(!m.done);
+      if(Math.abs(m.stats.drift)>0.002)showNotice('Material drift is above 0.2%. Compare a Fine-step run before relying on this late stage.');
+      $('status').textContent=m.done?`Ready · age ${fmt(m.time)} · ${m.step.toLocaleString()} updates`:`Calculating age ${fmt(m.targetTime)} · currently ${fmt(m.time)}`;
+      if(m.done&&playing){clearTimeout(playTimer);playTimer=setTimeout(playNext,55);}
+    }
+  };
+  worker.onerror=e=>{fatal=true;stopPlay();showNotice(`Worker error: ${e.message}. Use the local launcher and try CPU worker mode.`,true);setBusy(false);};
+  for(const id of CONFIG_IDS){
+    const el=$(id);if(el.type==='range')el.addEventListener('input',scheduleChange);else el.addEventListener('change',applyControls);
+  }
+  $('preset').onchange=()=>{
+    let c={...config,init:'patches'};
+    if($('preset').value==='balanced')c={...c,radius:1.8,coverage:.24,variation:.70,irregularity:.35};
+    if($('preset').value==='small')c={...c,radius:1.3,coverage:.18,variation:.80,irregularity:.35};
+    if($('preset').value==='broad')c={...c,radius:3.4,coverage:.40,variation:.55,irregularity:.50};
+    if($('preset').value==='reference')c={...c,init:'perturbations',total:4,a:4,b:1,da:.0625,db:1};
+    writeControls(c);reset(c);
+  };
+  $('newSeed').onclick=()=>{const a=new Uint32Array(1);crypto.getRandomValues(a);$('seed').value=a[0];applyControls();};
+  $('defaultsButton').onclick=()=>{$('preset').value='balanced';view={threshold:3,invert:false};$('threshold').value=3;$('invert').checked=false;horizon=512;writeControls(C.DEFAULTS);updateTimelineLabels();reset(C.DEFAULTS);};
+  $('evolution').oninput=()=>requestTime(timeAt($('evolution').value));
+  $('timeInput').onchange=()=>requestTime(Number($('timeInput').value));
+  $('threshold').oninput=()=>{view.threshold=Number($('threshold').value);updateOutputs();queuePaint();worker.postMessage({type:'view',runId,view});};
+  $('invert').onchange=()=>{view.invert=$('invert').checked;queuePaint();worker.postMessage({type:'view',runId,view});};
+  $('playButton').onclick=()=>{if(playing){requestStop();return;}playing=true;$('playButton').textContent='Pause';if(frame?.done)playNext();};
+  $('cancelButton').onclick=requestStop;
+  $('resetButton').onclick=()=>requestTime(0);
+  $('extendButton').onclick=()=>{horizon=Math.min(65536,horizon*2);updateTimelineLabels();if(frame)$('evolution').value=sliderAt(frame.done?frame.time:frame.targetTime);$('status').textContent=`Timeline extended to ${fmt(horizon,0)}. Your seed and existing history are unchanged.`;};
+  $('endButton').onclick=()=>requestTime(horizon);
+  $('pinButton').onclick=()=>{if(frame?.done&&bookmarks.length<12&&!bookmarks.includes(frame.time)){bookmarks.push(frame.time);bookmarks.sort((a,b)=>a-b);renderPins();}};
+  $('fitButton').onclick=fit;
+  $('fullscreenButton').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.studio').requestFullscreen();setTimeout(fit,60);}catch(e){showNotice('Fullscreen is unavailable in this window.');}};
+  document.addEventListener('fullscreenchange',()=>{$('fullscreenButton').textContent=document.fullscreenElement?'Exit expanded view':'Expand view';setTimeout(fit,50);});
+  $('exportButton').onclick=exportMask;
+  $('saveSetup').onclick=async()=>{try{await saveBlob(new Blob([JSON.stringify(recipe(),null,2)],{type:'application/json'}),`aggregation_seed-${config.seed}_age-${frame.time.toFixed(2)}.json`,'Explorer setup','application/json','.json');}catch(e){showNotice('Setup save failed: '+e.message,true);}};
+  $('loadSetup').onclick=()=>$('setupFile').click();
+  $('setupFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{if(f.size>1024*1024)throw new Error('Setup file is too large. Select a saved JSON recipe, not an image.');await importRecipe(JSON.parse(await f.text()));}catch(err){showNotice('Setup was not loaded: '+err.message,true);}finally{e.target.value='';}};
+  $('helpButton').onclick=()=>$('aboutDialog').showModal();$('closeAbout').onclick=()=>$('aboutDialog').close();
+  window.addEventListener('resize',fit);new ResizeObserver(()=>fit()).observe($('canvasArea'));
+  document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','SELECT','BUTTON','TEXTAREA'].includes(document.activeElement.tagName)&&!$('aboutDialog').open){e.preventDefault();$('playButton').click();}});
+  // Read-only diagnostic entry points plus ordinary UI actions for reproducible automated testing.
+  window.AggregationApp={get frame(){return frame;},get config(){return {...config};},get view(){return {...view};},get ready(){return ready;},get fatal(){return fatal;},
+    seek:t=>requestTime(t),stop:requestStop,reset:c=>{const cfg=C.validate({...C.DEFAULTS,...c});$('preset').value=cfg.init==='perturbations'?'reference':'balanced';writeControls(cfg);reset(cfg);},
+    recipe,importRecipe,grayMask,crc:()=>frame?AggregationPNG.crc32(new Uint8Array(frame.data.buffer)):null};
+  writeControls(config);updateTimelineLabels();reset(config);fit();
+})();
+</script>
+</body></html>
